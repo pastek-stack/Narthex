@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Narthex</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+:root{--bg:#fff;--fg:#111;--muted:#9a9a9a;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:12px/1.6 var(--mono);letter-spacing:.06em}
+nav{position:fixed;top:0;left:0;right:0;z-index:2;display:flex;justify-content:space-between;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));mix-blend-mode:difference;color:#fff}
+nav a{color:inherit;text-decoration:none;letter-spacing:.3em;text-transform:uppercase}
+section{height:100svh;min-height:520px;position:relative;background:#fff}
+section img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
+section.cover img{object-fit:cover}
+.cap{position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:1fr auto;gap:4px 24px;align-items:end;mix-blend-mode:difference;color:#fff}
+.cap b{font-weight:400;text-transform:uppercase;letter-spacing:.3em}
+.cap span{display:block}
+.cap .r{text-align:right}
+.txt{height:auto;min-height:100svh;display:grid;align-content:center;padding:96px max(16px,env(safe-area-inset-right,0px)) 96px max(16px,env(safe-area-inset-left,0px));gap:28px;max-width:56ch}
+.txt p{margin:0}
+.txt .k{color:var(--muted)}
+.txt a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--fg)}
+.foot{color:var(--muted);font-size:11px}
+.foot a{color:inherit;border:0}
+@media (max-width:560px){.cap{grid-template-columns:1fr}.cap .r{text-align:left}}
+</style>
+</head>
+<body>
+<nav><a href="../">Narthex</a><span>aedaen-7f3q</span></nav>
+
+<section class="cover">
+  <img src="../assets/goth-07.jpg" alt="">
+  <div class="cap"><div><b>Goth</b><span>Suspension · PLA translucide, aluminium anodisé</span></div><div class="r">125 × 9,5 × 9,5 cm<br>LED 18 W · IP65<br>7 / 8</div></div>
+</section>
+
+<section>
+  <img src="../assets/goth-01.jpg" alt="">
+  <div class="cap"><div><b>Goth</b></div><div class="r">5 330 € TTC<br>4 pièces : 19 000 € HT, posées</div></div>
+</section>
+
+<section>
+  <img src="../assets/goth-13.jpg" alt="">
+  <div class="cap"><div><b>Goth</b><span>Fixation, plaque numérotée</span></div><div class="r"></div></div>
+</section>
+
+<section class="cover">
+  <img src="../assets/goth-09.jpg" alt="">
+  <div class="cap"><div><b>Goth</b><span>Allumée</span></div><div class="r">2 160 lm · blanc neutre</div></div>
+</section>
+
+<section>
+  <img src="../assets/obole-04.jpg" alt="">
+  <div class="cap"><div><b>Obole</b><span>Vide-poche · acier réemployé, aluminium anodisé</span></div><div class="r">57 × 11,5 × 5,5 cm<br>800 €<br>18 / 20</div></div>
+</section>
+
+<section>
+  <img src="../assets/hillel-03.jpg" alt="">
+  <div class="cap"><div><b>Hillel</b><span>Lampe · acier réemployé, aluminium anodisé</span></div><div class="r">58 × 12 × 8 cm<br>2 380 €<br>6 / 8</div></div>
+</section>
+
+<section class="txt">
+  <p class="k">Pour le bar, rue des Aveugles.</p>
+  <p>Une Goth chez vous trois mois, en dépôt, sans frais. Posée par l'atelier. Reprise sous quinze jours si elle ne plaît pas.</p>
+  <p>Pièces signées, numérotées, éditions fermées. Strasbourg.</p>
+  <p><a href="mailto:porte@narthex.example?subject=aedaen-7f3q">porte@narthex.example</a></p>
+  <p class="foot">Page privée, non référencée. <a href="mailto:porte@narthex.example?subject=STOP%20aedaen-7f3q">Ne plus recevoir</a>.</p>
+</section>
+</body>
+</html>

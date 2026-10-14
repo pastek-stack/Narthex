@@ -1,0 +1,37 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Narthex</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap">
+<style>
+/* White, like the studio photos. One word. One field. */
+:root{--bg:#fff;--fg:#111;--muted:#9a9a9a;--mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;color-scheme:light}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:12px/1.5 var(--mono);letter-spacing:.08em;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+main{height:100%;display:grid;grid-template-rows:auto 1fr auto;padding:24px 8px}
+h1{margin:0;font:400 12px/1 var(--mono);letter-spacing:.3em;text-transform:uppercase}
+form{position:relative;align-self:center;justify-self:start;display:flex;border-bottom:1px solid var(--fg);width:min(100%,220px)}
+input{flex:1;min-width:0;background:transparent;border:0;color:var(--fg);font:inherit;letter-spacing:.2em;padding:8px 0;outline:none}
+input::placeholder{color:var(--muted)}
+button{background:transparent;border:0;color:var(--muted);font:inherit;cursor:pointer;padding:8px 0 8px 12px}
+button:hover,button:focus-visible{color:var(--fg);outline:none}
+.err{position:absolute;left:0;bottom:-20px;color:var(--muted);font-size:11px}
+footer{display:flex;justify-content:space-between;gap:16px;color:var(--muted)}
+footer a{color:inherit;text-decoration:none}
+footer a:hover{color:var(--fg)}
+</style></head><body>
+<main>
+  <h1>Narthex</h1>
+  <form id="f" autocomplete="off">
+    <input id="key" type="text" placeholder="clé" aria-label="Clé" maxlength="24" spellcheck="false">
+    <button type="submit" aria-label="Entrer">→</button>
+    <div class="err" id="err" aria-live="polite"></div>
+  </form>
+  <footer><span>Strasbourg</span><a href="mailto:porte@narthex.example">porte@narthex.example</a></footer>
+</main>
+<script>
+const f=document.getElementById("f"),k=document.getElementById("key"),e=document.getElementById("err");
+f.addEventListener("submit",ev=>{ev.preventDefault();const v=k.value.trim().toLowerCase().replace(/[^a-z0-9-]/g,"");if(v.length<6){e.textContent="—";k.value="";return;}e.textContent="";location.href="k/"+v+".html";});
+</script>
+</body></html>
