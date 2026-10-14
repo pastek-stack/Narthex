@@ -1,5 +1,6 @@
-"""Carte Narthex — format DL (99 × 210 mm), 3 par feuille A4, traits de coupe.
+"""Carte Narthex — carte de visite 85 × 55 mm, 8 par feuille A4, traits de coupe.
 Usage : python3 carte.py nnf04a30 [autre-clé ...]  → carte_<date>.pdf
+Une clé par ligne d'arguments ; une seule clé = feuille entière de la même carte.
 """
 import sys, datetime
 from reportlab.lib.pagesizes import A4
@@ -10,44 +11,46 @@ from reportlab.pdfbase.ttfonts import TTFont
 
 pdfmetrics.registerFont(TTFont("Mono", "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf"))
 URL = "pastek-stack.github.io/Narthex"
-W, H = 210 * mm, 99 * mm  # carte DL, à l'italienne
+W, H = 85 * mm, 55 * mm
+M = 7 * mm  # marge intérieure
 
 def carte(c, x0, y0, key):
-    # tout en noir pur, pas de filet, pas de fond
     c.setFillColorRGB(0, 0, 0)
-    # mot, haut gauche
-    c.setFont("Mono", 9)
-    c.drawString(x0 + 14 * mm, y0 + H - 16 * mm, "N A R T H E X")
-    # clé, centre optique
-    c.setFont("Mono", 9)
-    c.drawString(x0 + 14 * mm, y0 + 44 * mm, "Clé")
-    c.setFont("Mono", 22)
-    c.drawString(x0 + 14 * mm, y0 + 32 * mm, key)
-    # url, bas gauche, discret
-    c.setFont("Mono", 7.5)
-    c.setFillColorRGB(0.45, 0.45, 0.45)
-    c.drawString(x0 + 14 * mm, y0 + 12 * mm, URL)
+    c.setFont("Mono", 7)
+    c.drawString(x0 + M, y0 + H - M - 5, "N A R T H E X")
+    c.setFont("Mono", 6.5)
+    c.drawString(x0 + M, y0 + 24 * mm, "Clé")
+    c.setFont("Mono", 15)
+    c.drawString(x0 + M, y0 + 17 * mm, key)
+    c.setFont("Mono", 5.5)
+    c.setFillColorRGB(0.5, 0.5, 0.5)
+    c.drawString(x0 + M, y0 + M, URL)
 
 def marks(c, x0, y0):
-    c.setStrokeColorRGB(0.6, 0.6, 0.6); c.setLineWidth(0.25)
-    L = 4 * mm
-    for (x, y) in [(x0, y0), (x0 + W, y0), (x0, y0 + H), (x0 + W, y0 + H)]:
-        c.line(x - L - 1 * mm, y, x - 1 * mm, y) if x == x0 else c.line(x + 1 * mm, y, x + L + 1 * mm, y)
-        c.line(x, y - L - 1 * mm, x, y - 1 * mm) if y == y0 else c.line(x, y + 1 * mm, x, y + L + 1 * mm)
+    c.setStrokeColorRGB(0.65, 0.65, 0.65); c.setLineWidth(0.2)
+    L, g = 3 * mm, 1 * mm
+    for x in (x0, x0 + W):
+        for y in (y0, y0 + H):
+            c.line(x, y - g - L if y == y0 else y + g, x, y - g if y == y0 else y + g + L)
+            c.line(x - g - L if x == x0 else x + g, y, x - g if x == x0 else x + g + L, y)
 
 def main(keys):
     out = f"carte_{datetime.date.today():%Y-%m-%d}.pdf"
     c = canvas.Canvas(out, pagesize=A4)
     pw, ph = A4
-    x0 = (pw - W) / 2
-    slots = [ph - 10 * mm - H - i * (H + 0) for i in range(3)]
-    i = 0
+    cols, rows, gap = 2, 4, 8 * mm
+    gx = (pw - cols * W - (cols - 1) * gap) / 2
+    gy = (ph - rows * H - (rows - 1) * gap) / 2
+    cells = [(gx + i * (W + gap), ph - gy - H - j * (H + gap)) for j in range(rows) for i in range(cols)]
+    if len(keys) == 1:
+        keys = keys * len(cells)
+    n = 0
     for key in keys:
-        if i == 3:
-            c.showPage(); i = 0
-        y0 = slots[i]
+        if n == len(cells):
+            c.showPage(); n = 0
+        x0, y0 = cells[n]
         carte(c, x0, y0, key); marks(c, x0, y0)
-        i += 1
+        n += 1
     c.save()
     print(out)
 
